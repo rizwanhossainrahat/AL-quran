@@ -4,6 +4,8 @@ import { use, useEffect, useState } from "react";
 import AyahListClient from "@/components/AyahListClient";
 import type { SurahDetail } from "@/types/quran";
 
+const SURAH_API = "https://api.alquran.cloud/v1/surah";
+
 export default function SurahPage({
   params,
 }: {
@@ -14,11 +16,9 @@ export default function SurahPage({
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const base =
-      process.env.NEXT_PUBLIC_SURAH ?? "http://api.alquran.cloud/v1/surah";
     Promise.all([
-      fetch(`${base}/${id}`).then((r) => r.json()),
-      fetch(`${base}/${id}/en.asad`).then((r) => r.json()),
+      fetch(`${SURAH_API}/${id}`).then((r) => r.json()),
+      fetch(`${SURAH_API}/${id}/en.asad`).then((r) => r.json()),
     ])
       .then(([arabicData, translationData]) => {
         const s = arabicData.data;

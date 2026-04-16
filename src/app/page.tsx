@@ -4,14 +4,14 @@ import { useEffect, useState, Suspense } from "react";
 import type { Surah } from "@/types/quran";
 import SurahListClient from "@/components/SurahListClient";
 
+const SURAH_API = "https://api.alquran.cloud/v1/surah";
+
 export default function HomePage() {
   const [surahs, setSurahs] = useState<Surah[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const base =
-      process.env.NEXT_PUBLIC_SURAH ?? "http://api.alquran.cloud/v1/surah";
-    fetch(base)
+    fetch(SURAH_API)
       .then((r) => r.json())
       .then((data) => setSurahs(data.data))
       .catch(() => setError("Failed to load surahs. Please try again."));
