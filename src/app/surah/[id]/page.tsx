@@ -14,7 +14,8 @@ export default function SurahPage({
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const base = process.env.NEXT_PUBLIC_SURAH!;
+    const base =
+      process.env.NEXT_PUBLIC_SURAH ?? "http://api.alquran.cloud/v1/surah";
     Promise.all([
       fetch(`${base}/${id}`).then((r) => r.json()),
       fetch(`${base}/${id}/en.asad`).then((r) => r.json()),

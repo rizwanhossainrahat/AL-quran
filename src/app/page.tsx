@@ -9,7 +9,9 @@ export default function HomePage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_SURAH!)
+    const base =
+      process.env.NEXT_PUBLIC_SURAH ?? "http://api.alquran.cloud/v1/surah";
+    fetch(base)
       .then((r) => r.json())
       .then((data) => setSurahs(data.data))
       .catch(() => setError("Failed to load surahs. Please try again."));
